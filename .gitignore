@@ -1,0 +1,7 @@
+/.vscode/**
+/prebuilt/**
+/*ndk
+/src/**
+/build/**
+*.tar.xz
+*.zip
