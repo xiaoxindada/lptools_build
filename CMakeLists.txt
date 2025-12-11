@@ -11,6 +11,7 @@ endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     message("This is use clang build")
+    add_compile_options("-fcolor-diagnostics")
     add_link_options("-fuse-ld=lld")
     if(NOT CMAKE_SYSTEM_NAME STREQUAL "Android")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
@@ -20,10 +21,8 @@ endif()
 
 add_link_options("-static")
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-        add_compile_options("-Os" "-flto")
-        add_link_options("-flto" "-Wl,--gc-sections" "-s")
-    endif()
+    add_compile_options("-flto" "-Os" "-ffunction-sections" "-fdata-sections")
+    add_link_options("-flto" "-Wl,--gc-sections" "-s")
 endif()
 
 # check x86_64 aprotoc
